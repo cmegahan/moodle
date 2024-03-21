@@ -2283,7 +2283,7 @@ privatefiles,moodle|/user/files.php';
         // Create the base data for the random questions in the set_references table.
         // This covers most of the hard work in one go.
         $concat = $DB->sql_concat("'{\"questioncategoryid\":\"'", 'q.category', "'\",\"includingsubcategories\":\"'",
-            'qs.includingsubcategories', "'\"}'");
+            'COALESCE(qs.includingsubcategories, 0)', "'\"}'");
         $sql = <<<EOF
             INSERT INTO {question_set_references}
             (usingcontextid, component, questionarea, itemid, questionscontextid, filtercondition)
